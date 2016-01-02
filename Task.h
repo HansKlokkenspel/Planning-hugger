@@ -18,6 +18,8 @@ public:
     bool hasNextConnectedTasks();
     bool nextConnectedTasksHaveCriticalValues();
 
+    const Task& getHighestConnectedTask();
+
     void backflow();
 private:
     int processingTime;

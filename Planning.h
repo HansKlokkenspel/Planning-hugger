@@ -2,7 +2,7 @@
 #define PLANNING_HUGGER_PLANNING_H
 
 #include <vector>
-#include <bits/stl_queue.h>
+#include <queue>
 #include "Task.h"
 
 class Planning {
@@ -12,6 +12,8 @@ public:
 
     Planning();
 
+    void initTasks();
+
     // TODO, add container type
     void getCriticalPath();
     bool checkAllEndsReached();
@@ -19,7 +21,7 @@ private:
     std::vector<Task> beginVertices;
     std::vector<Task> endVertices;
 
-    std::priority_queue<Task> criticalPath;
+//    std::priority_queue<Task> criticalPath;
 };
 
 #endif //PLANNING_HUGGER_PLANNING_H

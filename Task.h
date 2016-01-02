@@ -5,7 +5,7 @@
 
 class Task {
 public:
-    Task(const Task&) = delete;
+//    Task(const Task&) = delete;
     Task& operator=(const Task&) = delete;
 
     Task(int processingTime);
@@ -19,6 +19,9 @@ public:
     bool nextConnectedTasksHaveCriticalValues();
 
     const Task& getHighestConnectedTask();
+
+    void addNextConnectedTask(const Task& task);
+    void addPrerequisiteTask(const Task& task);
 
     void backflow();
 private:

@@ -2,7 +2,6 @@
 
 Task::Task(int processingTime) :
         processingTime(processingTime), criticalTime(0) {
-
 }
 
 void Task::updateCriticalTime(int time) {
@@ -59,4 +58,12 @@ const Task& Task::getHighestConnectedTask() {
     }
 
     return nextConnectedTasks[highestIndex];
+}
+
+void Task::addNextConnectedTask(const Task& task) {
+    nextConnectedTasks.push_back(task);
+}
+
+void Task::addPrerequisiteTask(const Task& task) {
+    prerequisiteTasks.push_back(task);
 }

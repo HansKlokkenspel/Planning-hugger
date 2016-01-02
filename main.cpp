@@ -1,8 +1,12 @@
 #include <iostream>
+#include "Planning.h"
 
 using namespace std;
 
 int main() {
-    cout << "Hello, World!" << endl;
+    Planning planning;
+
+    planning.initTasks();
+
     return 0;
 }

@@ -1,23 +1,30 @@
 #include "Task.h"
 
-Task::Task(int processingTime) {
+Task::Task(int processingTime) :
+        processingTime(processingTime), criticalTime(0) {
 
 }
 
-void Task::updateCriticalTime() {
-
+void Task::updateCriticalTime(int time) {
+    criticalTime = time;
 }
 
 bool Task::hasCriticalTime() {
-    return false;
+    return (bool) criticalTime;
 }
 
 bool Task::hasNextConnectedTasks() {
-    return false;
+    return nextConnectedTasks.size() > 0;
 }
 
 bool Task::nextConnectedTasksHaveCriticalValues() {
-    return false;
+    for (Task& task : nextConnectedTasks) {
+        if (!task.hasCriticalTime()) {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 void Task::backflow() {

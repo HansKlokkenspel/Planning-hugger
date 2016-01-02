@@ -1,12 +1,12 @@
 #include "Planning.h"
 
 void Planning::getCriticalPath() {
-    
+
 }
 
 bool Planning::checkAllEndsReached() {
     for (Task& vertex : beginVertices) {
-        if (!vertex.hasCritical) {
+        if (!vertex.hasCriticalTime()) {
             return false;
         }
     }

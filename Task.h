@@ -12,6 +12,7 @@ public:
 
     // checks the highest critical time of nextVertex and assigns it to own criticalTime + processingTime
     void updateCriticalTime(int time);
+    void updateCriticalTime();
 
     // When !nextVertices[x].hasCriticalTime, backflow from another point
     bool hasCriticalTime();

@@ -1,11 +1,27 @@
+#include <iostream>
 #include "Planning.h"
 
 void Planning::getCriticalPath() {
+    bool allEndsReached = false;
 
+    while (!allEndsReached) {
+        for (Task& task : endTasks) {
+            if (task.hasCriticalTime()) {
+                task.backflow();
+            } else {
+                // critical = processingTime;
+                task.updateCriticalTime();
+            }
+        }
+
+        allEndsReached = checkAllEndsReached();
+    }
+
+    std::cout << "all ends reached!";
 }
 
 bool Planning::checkAllEndsReached() {
-    for (Task& vertex : beginVertices) {
+    for (Task& vertex : beginTasks) {
         if (!vertex.hasCriticalTime()) {
             return false;
         }
@@ -53,11 +69,21 @@ void Planning::initTasks() {
     Task task3(9);
     task3.addPrerequisiteTask(task5);
 
-    endVertices.push_back(task1);
-    endVertices.push_back(task2);
-    endVertices.push_back(task3);
+    endTasks.push_back(task1);
+    endTasks.push_back(task2);
+    endTasks.push_back(task3);
 
-    beginVertices.push_back(task10);
-    beginVertices.push_back(task11);
-    beginVertices.push_back(task12);
+    beginTasks.push_back(task10);
+    beginTasks.push_back(task11);
+    beginTasks.push_back(task12);
+}
+
+bool Planning::allEndsReached() {
+    for (Task& task : beginTasks) {
+        if (!task.hasCriticalTime()) {
+            return false;
+        }
+    }
+
+    return true;
 }

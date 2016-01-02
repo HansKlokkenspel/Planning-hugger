@@ -8,5 +8,7 @@ int main() {
 
     planning.initTasks();
 
+    planning.getCriticalPath();
+
     return 0;
 }

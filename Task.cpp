@@ -67,3 +67,7 @@ void Task::addNextConnectedTask(const Task& task) {
 void Task::addPrerequisiteTask(const Task& task) {
     prerequisiteTasks.push_back(task);
 }
+
+void Task::updateCriticalTime() {
+    criticalTime = processingTime;
+}

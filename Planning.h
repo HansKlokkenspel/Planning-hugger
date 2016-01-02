@@ -14,12 +14,14 @@ public:
 
     void initTasks();
 
+    bool allEndsReached();
+
     // TODO, add container type
     void getCriticalPath();
     bool checkAllEndsReached();
 private:
-    std::vector<Task> beginVertices;
-    std::vector<Task> endVertices;
+    std::vector<Task> beginTasks;
+    std::vector<Task> endTasks;
 
 //    std::priority_queue<Task> criticalPath;
 };

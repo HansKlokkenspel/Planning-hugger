@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Task.h"
 
 Task::Task(int processingTime) :
@@ -5,7 +6,7 @@ Task::Task(int processingTime) :
 }
 
 void Task::updateCriticalTime(int time) {
-    criticalTime = time;
+    criticalTime = processingTime + time;
 }
 
 bool Task::hasCriticalTime() {
@@ -17,8 +18,8 @@ bool Task::hasNextConnectedTasks() {
 }
 
 bool Task::nextConnectedTasksHaveCriticalValues() {
-    for (Task& task : nextConnectedTasks) {
-        if (!task.hasCriticalTime()) {
+    for (Task* task : nextConnectedTasks) {
+        if (!task->hasCriticalTime()) {
             return false;
         }
     }
@@ -27,16 +28,16 @@ bool Task::nextConnectedTasksHaveCriticalValues() {
 }
 
 void Task::backflow() {
-    for (Task& task : prerequisiteTasks) {
-        if (task.hasCriticalTime()) {
-            task.backflow();
+    for (Task* task : prerequisiteTasks) {
+        if (task->hasCriticalTime()) {
+            task->backflow();
         } else {
-            if (task.hasNextConnectedTasks()) {
-                if (task.nextConnectedTasksHaveCriticalValues()) {
+            if (task->hasNextConnectedTasks()) {
+                if (task->nextConnectedTasksHaveCriticalValues()) {
                     // vertex has list with all connected vertices, get's one with highest critical value
-                    const Task& connectedTask = task.getHighestConnectedTask();
-                    task.updateCriticalTime(connectedTask.criticalTime);
-                    task.backflow();
+                    const Task& connectedTask = task->getHighestConnectedTask();
+                    task->updateCriticalTime(connectedTask.criticalTime);
+                    task->backflow();
                 }
             }
         }
@@ -49,7 +50,7 @@ const Task& Task::getHighestConnectedTask() {
     int currentCriticalTime = 0;
 
     for (int i = 0; i < nextConnectedTasks.size(); ++i) {
-        currentCriticalTime = nextConnectedTasks[i].criticalTime;
+        currentCriticalTime = nextConnectedTasks[i]->criticalTime;
 
         if (currentCriticalTime > highestCriticalTime) {
             highestCriticalTime = currentCriticalTime;
@@ -57,14 +58,14 @@ const Task& Task::getHighestConnectedTask() {
         }
     }
 
-    return nextConnectedTasks[highestIndex];
+    return *nextConnectedTasks[highestIndex];
 }
 
-void Task::addNextConnectedTask(const Task& task) {
+void Task::addNextConnectedTask(Task* task) {
     nextConnectedTasks.push_back(task);
 }
 
-void Task::addPrerequisiteTask(const Task& task) {
+void Task::addPrerequisiteTask(Task* task) {
     prerequisiteTasks.push_back(task);
 }
 

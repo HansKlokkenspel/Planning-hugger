@@ -20,8 +20,8 @@ public:
     void getCriticalPath();
     bool checkAllEndsReached();
 private:
-    std::vector<Task> beginTasks;
-    std::vector<Task> endTasks;
+    std::vector<Task*> beginTasks;
+    std::vector<Task*> endTasks;
 
 //    std::priority_queue<Task> criticalPath;
 };

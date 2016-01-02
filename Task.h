@@ -21,16 +21,16 @@ public:
 
     const Task& getHighestConnectedTask();
 
-    void addNextConnectedTask(const Task& task);
-    void addPrerequisiteTask(const Task& task);
+    void addNextConnectedTask(Task* task);
+    void addPrerequisiteTask(Task* task);
 
     void backflow();
 private:
     int processingTime;
     int criticalTime;
 
-    std::vector<Task> prerequisiteTasks;
-    std::vector<Task> nextConnectedTasks;
+    std::vector<Task*> prerequisiteTasks;
+    std::vector<Task*> nextConnectedTasks;
 };
 
 #endif //PLANNING_HUGGER_TASK_H
